@@ -5,7 +5,7 @@ const Field = ({ children }) => {
   return (
     <View style={styles.container}>
       <ImageBackground
-        source={require('../../assets/Images/football.png')}
+        source={require('../../assets/Images/baseground_ball.jpg')}
         style={styles.backgroundImage}
       >
         {children}
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    width: 500,
-    height: 400,
+    width: '100%',
+    height: '65%',
     position: 'absolute',
   },
 });

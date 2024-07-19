@@ -1,30 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import Player from './src/screens/Player';
+import Ball from './src/screens/Ball';
 import Field from './src/screens/Field';
 
 const App = () => {
-  const basePosition = { x: 120, y: 130 };
-  const targetPosition = { x: 210, y: 190 };
+  const basePosition = { x: 185, y: 250 }; // baseman position
+  const player1Position = { x: 370, y: 130 }; // player 1 position
+  const player2Position = { x: 180, y: 100 }; // player 2 position
   const [position, setPosition] = useState(basePosition);
-  const [isMoving, setIsMoving] = useState(false);
+  const [step, setStep] = useState(0);
 
-  const movePlayer = () => {
-    if (isMoving) return;
-
-    setIsMoving(true);
-    setPosition(targetPosition);
-
-    setTimeout(() => {
-      setPosition(basePosition);
-      setIsMoving(false);
-    }, 1000); // move back after 1 second
+  const moveBall = () => {
+    setStep((prevStep) => (prevStep + 1) % 4);
   };
+
+  useEffect(() => {
+    let newPosition;
+    if (step === 1) {
+      newPosition = player1Position;
+    } else if (step === 2) {
+      newPosition = player2Position;
+    } else if (step === 3) {
+      newPosition = basePosition;
+    } else {
+      newPosition = basePosition;
+    }
+
+    const timeout = setTimeout(() => {
+      setPosition(newPosition);
+      if (step !== 3) {
+        moveBall();
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeout);
+  }, [step]);
 
   return (
     <Field>
-      <TouchableOpacity style={styles.field} onPress={movePlayer}>
-        <Player position={position} />
+      <TouchableOpacity style={styles.field} onPress={moveBall}>
+        <Ball position={position} />
       </TouchableOpacity>
     </Field>
   );
