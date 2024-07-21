@@ -31,8 +31,8 @@ const App = () => {
       newPosition = basePosition;
     }
 
-    ballPositionX.value = withSpring(newPosition.x, { damping: 5, stiffness: 5});
-    ballPositionY.value = withSpring(newPosition.y, { damping: 5, stiffness: 5});
+    ballPositionX.value = withSpring(newPosition.x, { damping: 3, stiffness: 3});
+    ballPositionY.value = withSpring(newPosition.y, { damping: 3, stiffness: 3});
 
     const timeout = setTimeout(() => {
       if (step !== 3) {
@@ -96,7 +96,7 @@ export default App;
 
 
 
-// / import React, { useEffect, useState } from 'react';
+
 // import { StyleSheet } from 'react-native';
 // import Ball from './src/screens/Ball';
 // import Field from './src/screens/Field';
