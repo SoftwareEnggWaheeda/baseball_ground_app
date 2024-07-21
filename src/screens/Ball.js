@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-const Ball = ({ position }) => {
+const Ball = () => {
     return (
-        <View style={[styles.ball, { left: position.x, top: position.y, }]} />
+        <View style={styles.ball} />
     );
 };
 
